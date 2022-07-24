@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDom from "react-dom";
-
+import "./index.css"
 const App = () => (
-	<h1>Testin react big boiiii </h1>
+	<div className="main">
+    		<h1>Testin react big boiiii </h1>
+	</div>
 );
 
 ReactDom.render(
