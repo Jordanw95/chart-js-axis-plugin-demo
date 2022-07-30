@@ -1,4 +1,6 @@
-.main{
-	border: 3px solid red;
-	backgroundColor: red;
+.container{
+	display:flex;
+	flex-direction: row;
+	align: center;
+	justify-content:center;
 }

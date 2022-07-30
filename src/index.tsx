@@ -1,13 +1,10 @@
 import React from "react";
 import ReactDom from "react-dom";
-import "./index.css"
+import "./index.css";
 const App = () => (
-	<div className="main">
-    		<h1>Testin react big boiiii </h1>
+	<div className="container">
+		<p>an itemmmmmm</p>
+		<div onClick={() => console.log("something")} >A button</div>
 	</div>
 );
-
-ReactDom.render(
-	<App />,
-	document.getElementById("root")
-);
+ReactDom.render(<App />, document.getElementById("root"));
