@@ -8,6 +8,12 @@
     align-items: center;
 }
 
+.fade {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.3s, opacity 0.4s linear;
+}
+
 .container{
     display: flex;
     gap: 32px;
@@ -16,7 +22,7 @@
 .left{
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    gap: 36px;
 }
 
 .icon-container{

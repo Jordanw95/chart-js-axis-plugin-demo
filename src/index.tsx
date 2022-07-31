@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import Entrance from './components/entrance';
+import Plugin from './containers';
 
-const App = () => <Entrance>A button</Entrance>;
+const App = () => <Plugin></Plugin>;
 ReactDom.render(<App />, document.getElementById('root'));
