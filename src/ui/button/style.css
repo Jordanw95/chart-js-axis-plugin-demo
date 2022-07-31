@@ -1,0 +1,34 @@
+.button{
+    font-family: 'Nunito', sans-serif;
+}
+
+.standard{
+    border-radius: 6px;
+    border: 1px solid #6472a145;
+    background-color: #49b5c152;
+    color: #515151;
+    transition: all .2s ease-in-out;
+}
+
+.standard:hover{
+    transform: scale(1.05); 
+}
+
+.fancy{
+    margin: 0;
+    cursor: pointer;
+    height: 2em;
+    font-size:32px;
+    border-radius: 2px;
+    padding: 6px 1em;
+    background: linear-gradient(#1095c1 0 0) calc(100% - var(--p,0%)) / var(--p,0%) no-repeat;
+    transition: 0.8s, background-position 0s;
+    border: 0px;
+}
+
+.fancy:hover {
+    --p: 100%;
+    color: #fff;
+}
+  
+

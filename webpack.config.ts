@@ -7,10 +7,21 @@ const config: Configuration = {
   entry: "./src/index.tsx",
   module: {
     rules: [
-      {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
+      { test: /\.css$/, use: [ 
+        { loader: "style-loader" },  // to inject the result into the DOM as a style block
+        { loader: "css-loader", options: { modules: true } },  // to convert the resulting CSS to Javascript to be bundled (modules:true to rename CSS classes in output to cryptic identifiers, except if wrapped in a :global(...) pseudo class)
+      ]
+    },
+    {
+      test: /\.(png|jp(e*)g|svg|gif)$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            name: 'images/[hash]-[name].[ext]',
+          },
+        },
+      ]},
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
@@ -28,7 +39,7 @@ const config: Configuration = {
     ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js", ".css"],
   },
   output: {
     path: path.resolve(__dirname, "build"),

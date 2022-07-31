@@ -1,0 +1,10 @@
+:root{
+    --font-size: 14px;
+}
+
+.text{
+    font-family: 'Nunito', sans-serif;
+    font-size: var(--font-size);
+    
+    margin: 0;
+}

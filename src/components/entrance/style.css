@@ -1,0 +1,41 @@
+.entrance-body{
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    display: flex;
+    gap: 32px;
+}
+
+.left{
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.icon-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-icon{
+    fill: #57a5e5;
+}
+
+.splitter{
+    width: 8px;
+    background-color: #000000ab;
+    border-radius: 6px;
+}
+
+.button-container{
+    display: flex;
+    align-items: center;
+}
