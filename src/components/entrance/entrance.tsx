@@ -5,20 +5,35 @@ import styles from './style.css';
 
 interface EntranceProps {
   onEnter: () => void;
+  fadeDuration: number;
+}
+
+interface EntranceState {
   fade: boolean;
 }
 
-class Entrance extends React.Component<EntranceProps, {}> {
+class Entrance extends React.Component<EntranceProps, EntranceState> {
   constructor(props: EntranceProps) {
     super(props);
+    this.state = {
+      fade: false,
+    };
   }
+
+  handleEnter = () => {
+    this.setState({ fade: true });
+    setTimeout(() => this.props.onEnter(), this.props.fadeDuration * 1000);
+  };
 
   render() {
     const bodyClass = `${styles['entrance-body']} ${
-      this.props.fade && styles.fade
+      this.state.fade && styles.fade
     }`;
+    const style = {
+      '--fade-out-duration': `${this.props.fadeDuration}s`,
+    } as React.CSSProperties;
     return (
-      <div className={bodyClass}>
+      <div className={bodyClass} style={style}>
         <div className={styles.container}>
           <div className={styles.left}>
             <div className={styles['icon-container']}>
@@ -36,7 +51,7 @@ class Entrance extends React.Component<EntranceProps, {}> {
           </div>
           <div className={styles.splitter}></div>
           <div className={styles['button-container']}>
-            <Button onClick={() => this.props.onEnter()} variant="fancy">
+            <Button onClick={() => this.handleEnter()} variant="fancy">
               View demo...
             </Button>
           </div>

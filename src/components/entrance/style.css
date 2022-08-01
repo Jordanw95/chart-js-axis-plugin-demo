@@ -1,3 +1,7 @@
+:root{
+    --fade-out-duration: 3s;
+}
+
 .entrance-body{
     overflow: hidden;
     position: absolute;
@@ -11,7 +15,7 @@
 .fade {
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0s 0.3s, opacity 0.4s linear;
+    transition: visibility 0s var(--fade-out-duration), opacity var(--fade-out-duration) linear;
 }
 
 .container{
