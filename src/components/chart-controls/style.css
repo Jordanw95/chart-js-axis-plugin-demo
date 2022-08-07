@@ -1,0 +1,19 @@
+.controls-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 12px;
+}
+
+.data-controls{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+    align-items: center;
+}
+
+.display-controls{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+}

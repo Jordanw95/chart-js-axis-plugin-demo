@@ -30,8 +30,8 @@ class PluginDemo extends React.Component<PluginDemoProps, PluginDemoState> {
   };
 
   handleChartOptsChange = (opts: ChartOpts) => {
-      this.setState({chartOpts: opts})
-  }
+    this.setState({ chartOpts: opts });
+  };
 
   render() {
     const { fadeIn } = this.state;
@@ -39,7 +39,10 @@ class PluginDemo extends React.Component<PluginDemoProps, PluginDemoState> {
     return (
       <div className={mainClass}>
         <div className={styles['chart-container']}>
-          <ChartComponent data={this.state.data} chartOpts={this.state.chartOpts}></ChartComponent>
+          <ChartComponent
+            data={this.state.data}
+            chartOpts={this.state.chartOpts}
+          ></ChartComponent>
         </div>
         <div className={styles['controls']}>
           <ChartControls
