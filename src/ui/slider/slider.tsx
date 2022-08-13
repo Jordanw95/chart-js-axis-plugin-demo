@@ -26,15 +26,15 @@ const Slider = ({
     onChange(inputValue);
   };
 
-  const [debouncedChange] = useState(() => 
+  const [debouncedChange] = useState(() =>
     debounce(bubbleChange, debounceTime)
-  )
+  );
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
-      const eventTarget = event.target as HTMLInputElement;
-      const inputValue = Number(eventTarget.value);
-      setValue(inputValue);
-    debouncedChange(inputValue)
+    const eventTarget = event.target as HTMLInputElement;
+    const inputValue = Number(eventTarget.value);
+    setValue(inputValue);
+    debouncedChange(inputValue);
   };
   return (
     <div className={styles['slider-container']}>

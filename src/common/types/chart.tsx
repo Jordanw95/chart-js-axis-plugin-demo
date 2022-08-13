@@ -1,11 +1,13 @@
 import { ScriptableContext } from 'chart.js';
 
+export type Datapoint = {
+    x: string;
+    y: number;
+  }
+
 export type Data = {
   datasets: {
-    data: {
-      x: string;
-      y: number;
-    }[];
+    data: Datapoint[];
   }[];
 };
 
@@ -24,4 +26,5 @@ export interface ChartOpts {
   colorOpts: ColorOpts;
   borderRadius: number;
   colorFunction: ColorFunction;
+  animations: boolean;
 }

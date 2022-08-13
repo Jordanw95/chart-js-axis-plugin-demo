@@ -1,7 +1,7 @@
 import React from 'react';
 import Text from '../../ui/text';
 import { ChartOpts, Data } from '../../common/types';
-import { Chart, registerables, ChartConfiguration } from 'chart.js';
+import { Chart, registerables, ChartConfiguration, defaults } from 'chart.js';
 
 interface ChartProps {
   data?: Data;
@@ -27,9 +27,9 @@ class ChartComponent extends React.Component<ChartProps, ChartState> {
       return;
     }
     if (prevProps.data !== data) {
-    //   this.createNewChart();
-    chart.data = data;
-    chart.update()
+      //   this.createNewChart();
+      chart.data = data;
+      chart.update();
     }
     if (prevProps.chartOpts !== chartOpts && chartOpts) {
       this.updateChart(chart, chartOpts, data);
@@ -69,6 +69,7 @@ class ChartComponent extends React.Component<ChartProps, ChartState> {
         },
       },
     },
+    animation:  chartOpts.animations && defaults.animations,
     plugins: {
       legend: {
         display: false,

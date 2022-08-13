@@ -1,35 +1,3 @@
-import { ScriptableContext } from 'chart.js';
-import { Data, ChartOpts, ColorOpts, ColorFunction } from '../../common/types';
-
-const colorFunctions = {
-  steppingHue: (
-    context: ScriptableContext<'bar'>,
-    data: Data,
-    colorOpts: ColorOpts
-  ): string => {
-    const { baseHue, hueSpan } = colorOpts;
-    const hueStepSize =
-      hueSpan / data.datasets[context.datasetIndex].data.length;
-    const hue = baseHue;
-    const shadingIndex = context.dataIndex;
-    return `hsl(${hue + hueStepSize * shadingIndex},100%,75%)`;
-  },
-  colorByScore: (context: ScriptableContext<'bar'>): string => {
-    const maxRange = context.chart.scales.y.max - context.chart.scales.y.min;
-    const gradingConstant = 100 / maxRange;
-    const hue = gradingConstant * context.parsed.y;
-    return `hsl(${gradingConstant * context.parsed.y},100%,50%)`;
-  },
-};
-export const defaultOpts: ChartOpts = {
-  colorOpts: {
-    baseHue: 206,
-    hueSpan: 30,
-  },
-  borderRadius: 4,
-  colorFunction: colorFunctions.colorByScore,
-};
-
 export const exampleLabels = [
   'Old Tjikko',
   'Oliveira do Mouchão',

@@ -2,10 +2,11 @@ import React from 'react';
 import Text from '../../ui/text';
 import Button from '../../ui/button';
 import Input from '../../ui/slider';
-import { defaultOpts, exampleLabels } from './fixtures';
-import { Data, ChartOpts, ColorOpts } from '../../common/types';
+import { exampleLabels } from './fixtures';
+import { Data, ChartOpts, ColorOpts, Datapoint } from '../../common/types';
 import Slider from '../../ui/slider/slider';
 import styles from './style.css';
+import { SortFunction, sortingFunctions, defaultOpts } from './config';
 
 const getShuffledArr = (arr: string[]): string[] => {
   const newArr = arr.slice();
@@ -24,6 +25,7 @@ interface ChartControlsProps {
 interface ChartControlsState {
   data: Data;
   chartOpts: ChartOpts;
+  sortFunction: SortFunction;
   nDatapoints: number;
 }
 
@@ -38,6 +40,7 @@ class ChartControls extends React.Component<
       nDatapoints,
       data: this.getRandomData(),
       chartOpts: defaultOpts,
+      sortFunction: sortingFunctions.bubbleSort
     };
     this.props.onDataChange(this.state.data);
     this.props.onOptsChange(defaultOpts);
@@ -46,7 +49,7 @@ class ChartControls extends React.Component<
   updateOpts = (opt: Partial<ChartOpts>) => {
     const chartOpts = { ...this.state.chartOpts, ...opt };
     this.setState({ chartOpts });
-    this.props.onOptsChange(this.state.chartOpts);
+    this.props.onOptsChange(chartOpts);
   };
 
   updateColorOpts = (colorOpt: Partial<ColorOpts>) => {
@@ -56,7 +59,7 @@ class ChartControls extends React.Component<
 
   updateData = (data: Data) => {
     this.setState({ data });
-    this.props.onDataChange(this.state.data);
+    this.props.onDataChange(data);
   };
 
   handleChangeDps = (nDatapoints: number) => {
@@ -64,31 +67,25 @@ class ChartControls extends React.Component<
     this.updateData(this.getRandomData());
   };
 
-  bubbleSortData = async (data: Data): void => {
-    const dataArray = data.datasets[0].data
-    let sorted = false;
-    while (!sorted){
-        sorted = true
-            await dataArray.forEach(async (dp, i) => {
-                if (i !== dataArray.length - 1 && dataArray[i+1].y < dataArray[i].y){
-                    let tmp = dataArray[i]
-                    dataArray[i] = dataArray[i+1]
-                    dataArray[i+1] = tmp
-                    const updatedData = {
-                        datasets: [
-                            {
-                                data: dataArray
-                            }
-                        ]
-                    }
-                    this.updateData(updatedData)
-                    console.log(updatedData)
-                    await setTimeout(() => null, 1000)
-                    sorted=false;
-                }
-            })
-        }
+  handleSort = async () => {
+        this.updateOpts({ animations: false })
+      const { sortFunction, data }= this.state
+      const timeToRun = sortFunction(data, 100, this.renderSortStep)
+      setTimeout(() => this.updateOpts({ animations: true }), timeToRun)
   }
+
+
+  renderSortStep = (dataArray: Datapoint[], timeout: number): void => {
+      const newData = {
+          datasets: [
+              {
+                  data: dataArray
+              }
+          ]
+      }
+      setTimeout(() => this.updateData(newData), timeout)
+  }
+
 
   getRandomData = () => {
     const endSlice = this.state?.nDatapoints || 10;
@@ -112,7 +109,7 @@ class ChartControls extends React.Component<
         <Button onClick={() => this.updateData(this.getRandomData())}>
           Randomise data
         </Button>
-        <Button onClick={() => this.bubbleSortData(this.state.data)}>
+        <Button onClick={() => this.handleSort()}>
           Bubble sort
         </Button>
         <Slider
