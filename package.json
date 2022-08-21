@@ -26,6 +26,7 @@
 		"@types/webpack-dev-server": "^4.7.2",
 		"@typescript-eslint/eslint-plugin": "^5.30.7",
 		"@typescript-eslint/parser": "^5.30.7",
+		"axis-hover-plugin": "^1.0.0",
 		"babel-loader": "^8.2.5",
 		"chart.js": "^3.8.2",
 		"css-loader": "^6.7.1",

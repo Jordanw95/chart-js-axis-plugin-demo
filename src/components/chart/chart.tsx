@@ -2,6 +2,7 @@ import React from 'react';
 import Text from '../../ui/text';
 import { ChartOpts, Data } from '../../common/types';
 import { Chart, registerables, ChartConfiguration, defaults } from 'chart.js';
+import { axisHoverPlugin } from 'axis-hover-plugin';
 
 interface ChartProps {
   data?: Data;
@@ -27,9 +28,9 @@ class ChartComponent extends React.Component<ChartProps, ChartState> {
       return;
     }
     if (prevProps.data !== data) {
-      //   this.createNewChart();
       chart.data = data;
-      chart.update();
+      this.createNewChart();
+      // chart.update();
     }
     if (prevProps.chartOpts !== chartOpts && chartOpts) {
       this.updateChart(chart, chartOpts, data);
@@ -43,6 +44,12 @@ class ChartComponent extends React.Component<ChartProps, ChartState> {
     data: data,
     type: 'bar',
     options: this.createChartOptions(data, chartOpts),
+    plugins: [
+      axisHoverPlugin(
+        true,
+        data.datasets[0].data.map(dp => dp.x)
+      )
+    ],
   });
 
   createChartOptions = (
