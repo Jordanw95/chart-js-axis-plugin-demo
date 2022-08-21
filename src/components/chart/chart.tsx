@@ -35,6 +35,7 @@ class ChartComponent extends React.Component<ChartProps, ChartState> {
     if (prevProps.chartOpts !== chartOpts && chartOpts) {
       this.updateChart(chart, chartOpts, data);
     }
+    console.log(Chart.defaults.font)
   }
 
   createConfig = (
@@ -78,6 +79,9 @@ class ChartComponent extends React.Component<ChartProps, ChartState> {
     },
     animation:  chartOpts.animations && defaults.animations,
     plugins: {
+      axis_hover_plugin: {
+        font: `800 12px 'Nunito', sans-serif`
+      },
       legend: {
         display: false,
       },
