@@ -10,7 +10,6 @@ interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
 class Button extends React.Component<ButtonProps, {}> {
   constructor(props: ButtonProps) {
     super(props);
-    console.log(styles);
   }
   render() {
     const { variant = 'standard', children, onClick } = this.props;

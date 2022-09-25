@@ -28,7 +28,7 @@ export const sortingFunctions = {
     }
 }
 
-const colorFunctions = {
+export const COLOR_FUNCTIONS = {
     steppingHue: (
       context: ScriptableContext<'bar'>,
       data: Data,
@@ -55,6 +55,6 @@ const colorFunctions = {
       hueSpan: 30,
     },
     borderRadius: 4,
-    colorFunction: colorFunctions.colorByScore,
+    colorFunction: COLOR_FUNCTIONS.colorByScore,
     animations: true
   };

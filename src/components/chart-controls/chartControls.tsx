@@ -1,12 +1,11 @@
 import React from 'react';
 import Text from '../../ui/text';
 import Button from '../../ui/button';
-import Input from '../../ui/slider';
 import { exampleLabels } from './fixtures';
 import { Data, ChartOpts, ColorOpts, Datapoint } from '../../common/types';
 import Slider from '../../ui/slider/slider';
 import styles from './style.css';
-import { SortFunction, sortingFunctions, defaultOpts } from './config';
+import { SortFunction, sortingFunctions, defaultOpts, COLOR_FUNCTIONS } from './config';
 
 const getShuffledArr = (arr: string[]): string[] => {
   const newArr = arr.slice();
@@ -109,11 +108,11 @@ class ChartControls extends React.Component<
         <Button onClick={() => this.updateData(this.getRandomData())}>
           Randomise data
         </Button>
-        <Button onClick={() => this.handleSort()}>
+        <Button onClick={this.handleSort}>
           Bubble sort
         </Button>
         <Slider
-          onChange={(value) => this.handleChangeDps(value)}
+          onChange={this.handleChangeDps}
           min="1"
           max={exampleLabels.length}
           startingVal="10"
@@ -125,6 +124,7 @@ class ChartControls extends React.Component<
   }
 
   renderDisplayControls() {
+    const colorSliderClass = `${styles['color-sliders']} ${this.state.chartOpts.colorFunction === COLOR_FUNCTIONS.colorByScore ? styles['fade-out'] : styles['fade-in']}`
     return (
       <div className={styles['display-controls']}>
         <Text size="lg">Display Controls</Text>
@@ -135,6 +135,14 @@ class ChartControls extends React.Component<
           startingVal="4"
           label="Bar Border Radius"
         ></Slider>
+        <Text size="md">Color Mode</Text>
+        <Button onClick={() => this.updateOpts({colorFunction: COLOR_FUNCTIONS.colorByScore})}>
+          Color by Score
+        </Button>
+        <Button onClick={() => this.updateOpts({colorFunction: COLOR_FUNCTIONS.steppingHue})}>
+          Color by Spanning Hue
+        </Button>
+        <div className={colorSliderClass}>
         <Slider
           onChange={(value) => this.updateColorOpts({ baseHue: value })}
           min="0"
@@ -149,6 +157,7 @@ class ChartControls extends React.Component<
           startingVal="30"
           label="Hue Span"
         ></Slider>
+        </div>
       </div>
     );
   }
