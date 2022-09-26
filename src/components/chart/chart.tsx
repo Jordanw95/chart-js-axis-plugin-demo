@@ -20,6 +20,13 @@ class ChartComponent extends React.Component<ChartProps, ChartState> {
     Chart.register(...registerables);
   }
 
+  truncateText = (label: string): string => {
+    if (label.length <= 10) {
+      return label;
+    }
+    return `${label.substring(0, 10)}...`;
+  };
+
   componentDidUpdate(prevProps: ChartProps): void {
     const { chart } = this.state;
     const { data, chartOpts } = this.props;
@@ -47,8 +54,8 @@ class ChartComponent extends React.Component<ChartProps, ChartState> {
     plugins: [
       axisHoverPlugin(
         true,
-        data.datasets[0].data.map(dp => dp.x)
-      )
+        data.datasets[0].data.map((dp) => dp.x)
+      ),
     ],
   });
 
@@ -69,6 +76,9 @@ class ChartComponent extends React.Component<ChartProps, ChartState> {
         grid: {
           display: false,
         },
+        ticks: {
+          callback: (_, i) => this.truncateText(data.datasets[0].data[i].x),
+        },
       },
       y: {
         grid: {
@@ -76,7 +86,7 @@ class ChartComponent extends React.Component<ChartProps, ChartState> {
         },
       },
     },
-    animation:  chartOpts.animations && defaults.animations,
+    animation: chartOpts.animations && defaults.animations,
     plugins: {
       legend: {
         display: false,

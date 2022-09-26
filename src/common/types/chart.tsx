@@ -1,9 +1,9 @@
 import { ScriptableContext } from 'chart.js';
 
 export type Datapoint = {
-    x: string;
-    y: number;
-  }
+  x: string;
+  y: number;
+};
 
 export type Data = {
   datasets: {

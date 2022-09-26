@@ -5,7 +5,12 @@ import { exampleLabels } from './fixtures';
 import { Data, ChartOpts, ColorOpts, Datapoint } from '../../common/types';
 import Slider from '../../ui/slider/slider';
 import styles from './style.css';
-import { SortFunction, sortingFunctions, defaultOpts, COLOR_FUNCTIONS } from './config';
+import {
+  SortFunction,
+  sortingFunctions,
+  defaultOpts,
+  COLOR_FUNCTIONS,
+} from './config';
 
 const getShuffledArr = (arr: string[]): string[] => {
   const newArr = arr.slice();
@@ -39,7 +44,7 @@ class ChartControls extends React.Component<
       nDatapoints,
       data: this.getRandomData(),
       chartOpts: defaultOpts,
-      sortFunction: sortingFunctions.bubbleSort
+      sortFunction: sortingFunctions.bubbleSort,
     };
     this.props.onDataChange(this.state.data);
     this.props.onOptsChange(defaultOpts);
@@ -67,24 +72,22 @@ class ChartControls extends React.Component<
   };
 
   handleSort = async () => {
-        this.updateOpts({ animations: false })
-      const { sortFunction, data }= this.state
-      const timeToRun = sortFunction(data, 100, this.renderSortStep)
-      setTimeout(() => this.updateOpts({ animations: true }), timeToRun)
-  }
-
+    this.updateOpts({ animations: false });
+    const { sortFunction, data } = this.state;
+    const timeToRun = sortFunction(data, 100, this.renderSortStep);
+    setTimeout(() => this.updateOpts({ animations: true }), timeToRun);
+  };
 
   renderSortStep = (dataArray: Datapoint[], timeout: number): void => {
-      const newData = {
-          datasets: [
-              {
-                  data: dataArray
-              }
-          ]
-      }
-      setTimeout(() => this.updateData(newData), timeout)
-  }
-
+    const newData = {
+      datasets: [
+        {
+          data: dataArray,
+        },
+      ],
+    };
+    setTimeout(() => this.updateData(newData), timeout);
+  };
 
   getRandomData = () => {
     const endSlice = this.state?.nDatapoints || 10;
@@ -108,9 +111,7 @@ class ChartControls extends React.Component<
         <Button onClick={() => this.updateData(this.getRandomData())}>
           Randomise data
         </Button>
-        <Button onClick={this.handleSort}>
-          Bubble sort
-        </Button>
+        <Button onClick={this.handleSort}>Bubble sort</Button>
         <Slider
           onChange={this.handleChangeDps}
           min="1"
@@ -124,7 +125,11 @@ class ChartControls extends React.Component<
   }
 
   renderDisplayControls() {
-    const colorSliderClass = `${styles['color-sliders']} ${this.state.chartOpts.colorFunction === COLOR_FUNCTIONS.colorByScore ? styles['fade-out'] : styles['fade-in']}`
+    const colorSliderClass = `${styles['color-sliders']} ${
+      this.state.chartOpts.colorFunction === COLOR_FUNCTIONS.colorByScore
+        ? styles['fade-out']
+        : styles['fade-in']
+    }`;
     return (
       <div className={styles['display-controls']}>
         <Text size="lg">Display Controls</Text>
@@ -136,27 +141,35 @@ class ChartControls extends React.Component<
           label="Bar Border Radius"
         ></Slider>
         <Text size="md">Color Mode</Text>
-        <Button onClick={() => this.updateOpts({colorFunction: COLOR_FUNCTIONS.colorByScore})}>
+        <Button
+          onClick={() =>
+            this.updateOpts({ colorFunction: COLOR_FUNCTIONS.colorByScore })
+          }
+        >
           Color by Score
         </Button>
-        <Button onClick={() => this.updateOpts({colorFunction: COLOR_FUNCTIONS.steppingHue})}>
+        <Button
+          onClick={() =>
+            this.updateOpts({ colorFunction: COLOR_FUNCTIONS.steppingHue })
+          }
+        >
           Color by Spanning Hue
         </Button>
         <div className={colorSliderClass}>
-        <Slider
-          onChange={(value) => this.updateColorOpts({ baseHue: value })}
-          min="0"
-          max="255"
-          startingVal="206"
-          label="Starting hue"
-        ></Slider>
-        <Slider
-          onChange={(value) => this.updateColorOpts({ hueSpan: value })}
-          min="0"
-          max="100"
-          startingVal="30"
-          label="Hue Span"
-        ></Slider>
+          <Slider
+            onChange={(value) => this.updateColorOpts({ baseHue: value })}
+            min="0"
+            max="255"
+            startingVal="206"
+            label="Starting hue"
+          ></Slider>
+          <Slider
+            onChange={(value) => this.updateColorOpts({ hueSpan: value })}
+            min="0"
+            max="100"
+            startingVal="30"
+            label="Hue Span"
+          ></Slider>
         </div>
       </div>
     );
