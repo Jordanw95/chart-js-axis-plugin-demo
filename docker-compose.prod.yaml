@@ -2,8 +2,9 @@ version: '3.7'
 
 services:
 
-  react-container-prod:
-    container_name: react-container-prod 
+  chart-js-axis-plugin-demo-prod:
+    image: chart.js.axis.plugin.demo.prod
+    container_name: chart-js-axis-plugin-demo-prod 
     build:
       context: .
       dockerfile: Dockerfile.prod
