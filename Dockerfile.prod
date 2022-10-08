@@ -6,7 +6,6 @@ COPY . ./
 RUN npm i
 RUN npm run build
 # need to set up webpack to create html in build so that this isnt necessary 
-COPY build/index.html build/
 
 FROM nginx:stable-alpine
 COPY --from=builder /app/build /usr/share/nginx/html

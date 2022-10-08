@@ -2,6 +2,7 @@ import path from "path";
 import { Configuration } from "webpack";
 import 'webpack-dev-server';
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config: Configuration = {
   entry: "./src/index.tsx",
@@ -54,6 +55,9 @@ const config: Configuration = {
     new ForkTsCheckerWebpackPlugin({
       async: false
     }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    })
   ],
 };
 
