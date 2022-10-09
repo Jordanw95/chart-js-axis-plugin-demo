@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Build container image
-        run: docker build -f Dockerfile.prod -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
+        run: DOCKER_BUILDKIT=0 docker build -f Dockerfile.prod -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -64,7 +64,7 @@ jobs:
             # Remove old container
             docker rm $(echo $IMAGE_NAME)
             # Run a new container from a new image
-            docker run -d -p 8877:80 \
+            docker run -d -p 80:80 \
             --restart always \
             --name $(echo $IMAGE_NAME) \
             $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
