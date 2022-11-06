@@ -75,6 +75,5 @@ jobs:
             done;
             # Run the certbot command in the container
             docker exec $(echo $IMAGE_NAME) certbot --nginx -d jordanwatersdev.uk -d www.jordanwatersdev.uk --non-interactive --agree-tos -m ${{ secrets.CERTBOT_EMAIL }}
-            #Add a cronjob to renew cert every 12 hours
-            docker exec $(echo $IMAGE_NAME) 0 12 * * * /usr/bin/certbot renew --quiet
+              
             
