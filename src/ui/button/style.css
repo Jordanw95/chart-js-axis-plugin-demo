@@ -1,3 +1,7 @@
+:root{
+    --button-font-size: 32px;
+}
+
 .button{
     font-family: 'Nunito', sans-serif;
 }
@@ -20,7 +24,7 @@
     margin: 0;
     cursor: pointer;
     height: 2em;
-    font-size:32px;
+    font-size: var(--button-font-size);
     border-radius: 2px;
     padding: 6px 1em;
     background: linear-gradient(#1095c1 0 0) calc(100% - var(--p,0%)) / var(--p,0%) no-repeat;
@@ -33,4 +37,6 @@
     color: #fff;
 }
   
-
+.md {
+    font-size: 20px;
+}

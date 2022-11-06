@@ -5,6 +5,7 @@ type ButtonVariant = 'standard' | 'fancy';
 
 interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   variant?: ButtonVariant;
+  size?: string;
 }
 
 class Button extends React.Component<ButtonProps, {}> {
@@ -12,8 +13,8 @@ class Button extends React.Component<ButtonProps, {}> {
     super(props);
   }
   render() {
-    const { variant = 'standard', children, onClick } = this.props;
-    const buttonClass = `${styles.button} ${styles[variant]}`;
+    const { variant = 'standard', children, onClick, size="" } = this.props;
+    const buttonClass = `${styles.button} ${styles[variant]} ${styles[size]}`;
     return (
       <button className={buttonClass} onClick={onClick}>
         {children}

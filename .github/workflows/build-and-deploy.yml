@@ -63,6 +63,8 @@ jobs:
             docker stop $(echo $IMAGE_NAME)
             # Remove old container
             docker rm $(echo $IMAGE_NAME)
+            #remove any old images
+            docker rmi $(docker images -q)
             # Run a new container from a new image
             docker run -d -p 80:80 -p 443:443 \
             -v $(pwd)/letsencrypt:/etc/letsencrypt \

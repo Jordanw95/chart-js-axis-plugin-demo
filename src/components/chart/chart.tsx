@@ -34,10 +34,10 @@ class ChartComponent extends React.Component<ChartProps, ChartState> {
       this.createNewChart();
       return;
     }
+    chart.data = data;
     if (prevProps.data !== data) {
-      chart.data = data;
       this.createNewChart();
-      // chart.update();
+      return
     }
     if (prevProps.chartOpts !== chartOpts && chartOpts) {
       this.updateChart(chart, chartOpts, data);

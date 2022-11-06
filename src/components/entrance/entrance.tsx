@@ -25,6 +25,10 @@ class Entrance extends React.Component<EntranceProps, EntranceState> {
     setTimeout(() => this.props.onEnter(), this.props.fadeDuration * 1000);
   };
 
+  openNpm = () => {
+    window.open('https://www.npmjs.com/package/axis-hover-plugin', '_blank')?.focus()
+  }
+
   render() {
     const bodyClass = `${styles['entrance-body']} ${
       this.state.fade && styles.fade
@@ -53,6 +57,9 @@ class Entrance extends React.Component<EntranceProps, EntranceState> {
           <div className={styles['button-container']}>
             <Button onClick={() => this.handleEnter()} variant="fancy">
               View demo...
+            </Button>
+            <Button onClick={() => this.openNpm()} variant="fancy" size="md">
+              View npm package
             </Button>
           </div>
         </div>

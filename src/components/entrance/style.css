@@ -48,4 +48,10 @@
 .button-container{
     display: flex;
     align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.npm-button{
+    --button-font-size: 20px;
 }
