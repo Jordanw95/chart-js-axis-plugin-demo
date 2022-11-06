@@ -55,7 +55,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSHKEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA,{{ secrets.CERTBOT_EMAIL }}
+          envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA,{{ secrets.CERTBOT_EMAIL }},
           script: |
             # Login to registry
             docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
@@ -74,5 +74,5 @@ jobs:
               sleep 0.1;
             done;
             # Run the certbot command in the container
-            docker exec $(echo $IMAGE_NAME) certbot --nginx -d jordanwatersdev.uk -d www.jordanwatersdev.uk --non-interactive --agree-tos -m {{ secrets.CERTBOT_EMAIL }}
+            docker exec $(echo $IMAGE_NAME) certbot --nginx -d jordanwatersdev.uk -d www.jordanwatersdev.uk --non-interactive --agree-tos -m ${{ secrets.CERTBOT_EMAIL }}
             
