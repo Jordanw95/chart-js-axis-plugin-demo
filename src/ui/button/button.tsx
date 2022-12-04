@@ -13,7 +13,7 @@ class Button extends React.Component<ButtonProps, {}> {
     super(props);
   }
   render() {
-    const { variant = 'standard', children, onClick, size="" } = this.props;
+    const { variant = 'standard', children, onClick, size = '' } = this.props;
     const buttonClass = `${styles.button} ${styles[variant]} ${styles[size]}`;
     return (
       <button className={buttonClass} onClick={onClick}>

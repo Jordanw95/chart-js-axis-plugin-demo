@@ -30,3 +30,12 @@
     visibility: visible;
     opacity: 0;    
 }
+
+.dps-edit-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dps-edit-container * {
+    flex: 1 1 0px;
+}

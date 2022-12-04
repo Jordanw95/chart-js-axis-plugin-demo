@@ -112,14 +112,21 @@ class ChartControls extends React.Component<
           Randomise data
         </Button>
         <Button onClick={this.handleSort}>Bubble sort</Button>
-        <Slider
-          onChange={this.handleChangeDps}
-          min="1"
-          max={exampleLabels.length}
-          startingVal="10"
-          label="Add/Remove Datapoints"
-          debounceTime={500}
-        ></Slider>
+        <Text size="md"> Add/Remove datapoints </Text>
+        <div className={styles['dps-edit-container']}>
+          <Button
+            className={styles['dps-edit-button']}
+            onClick={() => this.handleChangeDps(this.state.nDatapoints + 1)}
+          >
+            Add
+          </Button>
+          <Button
+            className={styles['dps-edit-button']}
+            onClick={() => this.handleChangeDps(this.state.nDatapoints - 1)}
+          >
+            Remove
+          </Button>
+        </div>
       </div>
     );
   }

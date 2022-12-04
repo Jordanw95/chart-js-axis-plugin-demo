@@ -26,8 +26,10 @@ class Entrance extends React.Component<EntranceProps, EntranceState> {
   };
 
   openNpm = () => {
-    window.open('https://www.npmjs.com/package/axis-hover-plugin', '_blank')?.focus()
-  }
+    window
+      .open('https://www.npmjs.com/package/axis-hover-plugin', '_blank')
+      ?.focus();
+  };
 
   render() {
     const bodyClass = `${styles['entrance-body']} ${
